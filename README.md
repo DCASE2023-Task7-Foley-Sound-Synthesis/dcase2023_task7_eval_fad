@@ -34,5 +34,5 @@ The code of this repository is mostly from [google-research/google-research/frec
   ```
 * You can check the result from 
   ```
-  ./results/fad.csv
+  ./result/fad.csv
   ```
