@@ -9,26 +9,16 @@ The code of this repository is mostly from [google-research/google-research/frec
   ```
   git clone https://github.com/DCASE2023-Task7-Foley-Sound-Synthesis/dcase2023_task7_eval_fad.git
   ```
-* Install python requirements referring to the [original repository](https://github.com/google-research/google-research/tree/master/frechet_audio_distance). We checked the code runs without an error with the TensorFlow version below. 
+* Install python requirements and download a VGG model checkpoint file by running the command below. This command will install all the packages by pip install. 
 
   ```
-  tensorflow==2.11.0
+  python Setup.py
   ```
-* Download a VGG model checkpoint file from the [original repository](https://github.com/google-research/google-research/tree/master/frechet_audio_distance) and save it at `./data/vggish_model.ckpt`.
-* Put generated audio files and ground truth files following the folder structure below. For this challenge, the number of audio samples in each dir should be 100.
+* Put generated audio files following the folder structure below (You should follow the folder names.). For this challenge, the number of audio samples in each dir should be 100.
 
   ```
   .
-  ├── ground truth folder
-  │   ├── dog_bark
-  │   ├── footstep
-  │   ├── gunshot
-  │   ├── keyboard
-  │   ├── moving_motor_vehicle
-  │   ├── rain
-  │   └── sneeze_cough
-  │
-  └── generated folder
+  └── generated_audio
       ├── dog_bark
       ├── footstep
       ├── gunshot
@@ -37,21 +27,12 @@ The code of this repository is mostly from [google-research/google-research/frec
       ├── rain
       └── sneeze_cough
   ```
-  ## Usage
-  * You can modify the config by changing the class variables of class FADWrapper. 
-    * Please modify `self.audio_dir:Dict[str,str]` for setting the ground truth folder and generated folder. The initial value is set like below.
-    ```
-    self.audio_dir:Dict[str,str] = {"gt":f"./eval/","generated":f"./synthesized/"}
-    ```
-    * Please modify `self.output_dir:str` for setting the ground truth folder and generated folder. The initial value is set like below.
-    ```
-    self.output_dir:str = "./results/baseline"
-    ```
-  * Run the code below
+## Usage
+* Run the code below
   ```
   python FADWrapper.py
   ```
-  * You can check the result from 
+* You can check the result from 
   ```
-  self.output_dir/fad.csv
+  ./results/fad.csv
   ```

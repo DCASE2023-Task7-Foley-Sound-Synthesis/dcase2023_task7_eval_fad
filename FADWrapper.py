@@ -9,7 +9,7 @@ import pandas as pd
 class FADWrapper:
     def __init__(self) -> None:
         self.name_of_sound_list:list = ['dog_bark', 'footstep', 'gunshot', 'keyboard', 'moving_motor_vehicle', 'rain', 'sneeze_cough']
-        self.audio_dir:Dict[str,str] = {"gt":f"./data/eval/","generated":f"./generated/"}
+        self.audio_dir:Dict[str,str] = {"gt":f"./data/eval/","generated":f"./generated_audio/"}
         self.output_dir:str = "./result"
         self.exist_mean_var_dict:Dict[str,bool] = {"gt":True,"generated":False}
     

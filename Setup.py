@@ -22,7 +22,7 @@ class Setup:
     
     def download_vggish_model_checkpoint(self) -> None:
         print('download vggish_model_checkpoint')
-        os.system(f'wget -P {self.vggish_model_checkpoint_url}')
+        os.system(f'wget -P ./data {self.vggish_model_checkpoint_url}')
     
     def setup(self):
         self.install_all_package()
