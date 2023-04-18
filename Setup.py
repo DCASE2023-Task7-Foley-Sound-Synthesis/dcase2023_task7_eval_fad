@@ -6,7 +6,6 @@ class Setup:
     def __init__(self) -> None:
         self.package_install_command_dict:Dict[str,str] = {
             'numpy1.22.4':'pip install numpy==1.22.4',
-            'absl-py1.4.0':'pip install absl-py==1.4.0',
             'apache-beam2.45.0':'pip install apache-beam==2.45.0',
             'scipy1.10.1':'pip install scipy==1.10.1',
             'tensorflow2.11.0': 'pip install tensorflow==2.11.0',

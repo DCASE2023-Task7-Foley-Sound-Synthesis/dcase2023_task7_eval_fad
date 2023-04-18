@@ -1,5 +1,6 @@
 from typing import Dict
 import os
+import argparse
 import pickle
 import numpy as np
 from create_embeddings_main import main
@@ -7,9 +8,12 @@ import fad_utils
 import pandas as pd
 
 class FADWrapper:
-    def __init__(self) -> None:
+    def __init__(self,
+                 ground_truth__audio_samples_dir:str = "./data/eval/",
+                 generated_audio_samples_dir:str = "./generated_audio/"
+                 ) -> None:
         self.name_of_sound_list:list = ['dog_bark', 'footstep', 'gunshot', 'keyboard', 'moving_motor_vehicle', 'rain', 'sneeze_cough']
-        self.audio_dir:Dict[str,str] = {"gt":f"./data/eval/","generated":f"./generated_audio/"}
+        self.audio_dir:Dict[str,str] = {"gt":ground_truth__audio_samples_dir,"generated":generated_audio_samples_dir}
         self.output_dir:str = "./result"
         self.exist_mean_var_dict:Dict[str,bool] = {"gt":True,"generated":False}
     
@@ -25,7 +29,7 @@ class FADWrapper:
                     embeddig_output_dir:str = f'{self.output_dir}/{name_of_sound}'
                     os.makedirs(embeddig_output_dir, exist_ok=True)
                     os.system(f'ls --color=never {self.audio_dir[set_type]}/{name_of_sound}/*  > {embeddig_output_dir}/{set_type}_files.cvs')
-                    main(input_file_list=f'{embeddig_output_dir}/{set_type}_files.cvs',output_path=f'{embeddig_output_dir}/{set_type}')
+                    main(input_file_list_path=f'{embeddig_output_dir}/{set_type}_files.cvs',output_path=f'{embeddig_output_dir}/{set_type}')
                 else:
                     embeddig_output_dir:str = f'{self.audio_dir[set_type]}{name_of_sound}'
                 with open(f'{embeddig_output_dir}/{set_type}_embedding.pkl', 'rb') as pickle_file:
@@ -40,5 +44,8 @@ class FADWrapper:
             pd.DataFrame(result_dict).to_csv(f'{self.output_dir}/fad.csv',index=False)
 
 if __name__ == '__main__':
-    fad_wrapper = FADWrapper()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dir',type=str,default = "./generated_audio/")
+    args = parser.parse_args()
+    fad_wrapper = FADWrapper(generated_audio_samples_dir=args.dir)
     fad_wrapper.compute_fad()

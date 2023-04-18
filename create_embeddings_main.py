@@ -20,56 +20,23 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import sys
-from absl import flags
 
 import create_embeddings_beam
-
-flags.DEFINE_string('input_files', None,
-                    'File containing a list of all input audio files.')
-flags.DEFINE_string(
-    'tfrecord_input', None, 'Path to a tfrecord file. The audio clips should be'
-    'wraped tf.examples as float featues using the feature'
-    'key specified by --feature_key.')
-flags.DEFINE_string(
-    'feature_key', 'audio/reference/raw_audio',
-    'Tf.example feature that contains the samples that are '
-    'to be processed.')
-flags.DEFINE_string('embeddings', None, 'The embeddings output file path.')
-flags.DEFINE_string('stats', None, 'The stats output file path.')
-flags.DEFINE_string('model_ckpt', 'data/vggish_model.ckpt',
-                    'The model checkpoint that should be loaded.')
-flags.DEFINE_integer('model_embedding_dim', 128,
-                     'The model dimension of the models emedding layer.')
-flags.DEFINE_integer('model_step_size', 8000,
-                     'Number of samples between each extraced windown.')
-
-#flags.mark_flags_as_mutual_exclusive(['input_files', 'tfrecord_input'],
-#                                     required=True)
-FLAGS = flags.FLAGS
-FLAGS(sys.argv)
-
 
 ModelConfig = collections.namedtuple(
     'ModelConfig', 'model_ckpt embedding_dim step_size')
 
-
-def main(input_file_list:list, output_path:str):
-  FLAGS.input_files = input_file_list
-  FLAGS.stats = output_path
-  if not FLAGS.embeddings and not FLAGS.stats:
-    raise ValueError('No output provided. Please specify at least one of '
-                     '"--embeddings" or "--stats".')
+def main(input_file_list_path:str, output_path:str):
   pipeline = create_embeddings_beam.create_pipeline(
-      tfrecord_input=FLAGS.tfrecord_input,
-      files_input_list=FLAGS.input_files,
-      feature_key=FLAGS.feature_key,
+      tfrecord_input = None,
+      files_input_list=input_file_list_path,
+      feature_key='audio/reference/raw_audio',
       embedding_model=ModelConfig(
-          model_ckpt=FLAGS.model_ckpt,
-          embedding_dim=FLAGS.model_embedding_dim,
-          step_size=FLAGS.model_step_size),
-      embeddings_output=FLAGS.embeddings,
-      stats_output=FLAGS.stats,
+          model_ckpt='data/vggish_model.ckpt',
+          embedding_dim=128,
+          step_size=8000),
+      embeddings_output=None,
+      stats_output=output_path,
       name=output_path)
   result = pipeline.run()
   result.wait_until_finish()

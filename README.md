@@ -12,7 +12,7 @@ The code of this repository is mostly from [google-research/google-research/frec
 * Install python requirements and download a VGG model checkpoint file by running the command below. This command will install all the packages by pip install. 
 
   ```
-  python Setup.py
+  python setup.py
   ```
 * Put generated audio files following the folder structure below (You should follow the folder names.). For this challenge, the number of audio samples in each dir should be 100.
 
@@ -30,7 +30,7 @@ The code of this repository is mostly from [google-research/google-research/frec
 ## Usage
 * Run the code below
   ```
-  python FADWrapper.py
+  python FADWrapper.py --dir='./generated_audio'
   ```
 * You can check the result from 
   ```
