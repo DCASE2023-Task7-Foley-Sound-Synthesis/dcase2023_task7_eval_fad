@@ -10,7 +10,7 @@ The code of this repository is largely from [google-research/google-research/fre
   git clone https://github.com/DCASE2023-Task7-Foley-Sound-Synthesis/dcase2023_task7_eval_fad.git
   ```
 * Install python requirements and download a VGG model checkpoint file by running the command below. This command will install all the packages by **pip install**.
-* Tested on Python==3.x.
+* Tested on Python==3.8.
 
   ```
   python setup.py
