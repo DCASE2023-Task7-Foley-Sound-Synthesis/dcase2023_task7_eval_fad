@@ -9,12 +9,12 @@ The code of this repository is mostly from [google-research/google-research/frec
   ```
   git clone https://github.com/DCASE2023-Task7-Foley-Sound-Synthesis/dcase2023_task7_eval_fad.git
   ```
-* Install python requirements and download a VGG model checkpoint file by running the command below. This command will install all the packages by pip install. 
+* Install python requirements and download a VGG model checkpoint file by running the command below. This command will install all the packages by **pip install**. 
 
   ```
   python setup.py
   ```
-* Put generated audio files following the folder structure below (You should follow the folder names.). For this challenge, the number of audio samples in each dir should be 100.
+* Put generated audio files following the folder structure below (You should follow the folder names of each category). For this challenge, the number of audio files(.wav) in each dir must be 100. The names of the audio files are not important.
 
   ```
   .

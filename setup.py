@@ -10,7 +10,8 @@ class Setup:
             'scipy1.10.1':'pip install scipy==1.10.1',
             'tensorflow2.11.0': 'pip install tensorflow==2.11.0',
             'tf-slim1.1.0': 'pip install tf-slim==1.1.0',
-            'pandas1.5.2': 'pip install pandas==1.5.2'
+            'pandas1.5.2': 'pip install pandas==1.5.2',
+            'librosa0.10.0.post2':'pip install librosa==0.10.0.post2'
         }
         self.vggish_model_checkpoint_url:str = 'https://storage.googleapis.com/audioset/vggish_model.ckpt'
     
